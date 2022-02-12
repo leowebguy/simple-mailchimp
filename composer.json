@@ -1,0 +1,38 @@
+{
+  "name": "leowebguy/simple-mailchimp",
+  "description": "A minimal Craft 3 plugin to connect forms to Mailchimp",
+  "version": "1.0.0",
+  "type": "craft-plugin",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Leo",
+      "homepage": "https://github.com/leowebguy"
+    }
+  ],
+  "require": {
+    "drewm/mailchimp-api": "^2.5"
+  },
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "^2.18"
+  },
+  "autoload": {
+    "psr-4": {
+      "leowebguy\\simplemailchimp\\": "src/"
+    }
+  },
+  "extra": {
+    "name": "Simple Mailchimp",
+    "handle": "simple-mailchimp",
+    "hasCpSection": false,
+    "hasCpSettings": false,
+    "class": "leowebguy\\simplemailchimp\\SimpleMailchimp",
+    "components": {
+      "smcService": "leowebguy\\simplemailchimp\\services\\MailchimpService"
+    }
+  },
+  "scripts": {
+    "lint": "vendor/bin/php-cs-fixer fix src --dry-run --rules=@PSR2 -vvv",
+    "lint-fix": "vendor/bin/php-cs-fixer fix src --rules=@PSR2 -vvv"
+  }
+}
