@@ -26,6 +26,7 @@
     "handle": "simple-mailchimp",
     "hasCpSection": false,
     "hasCpSettings": false,
+    "changelogUrl": "https://raw.githubusercontent.com/leowebguy/simple-mailchimp/main/CHANGELOG.md",
     "class": "leowebguy\\simplemailchimp\\SimpleMailchimp",
     "components": {
       "smcService": "leowebguy\\simplemailchimp\\services\\MailchimpService"
