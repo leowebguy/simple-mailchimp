@@ -11,17 +11,17 @@ composer require leowebguy/simple-mailchimp
 
 On your Control Panel, go to Settings → Plugins → "Simple Mailchimp" → Install
 
-## Usage
+## Credentials
 
-Gather the necessary parameters from Mailchimp
+Gather the necessary info from Mailchimp
 
-#### API Key (MC_API_KEY)
+#### API Key _MC_API_KEY_
 
 Go to https://admin.mailchimp.com/lists > Select Audience > Settings > Audience name and defaults > Audience ID
 
 ![Screenshot](resources/list_id.png)
 
-#### Audience ID (MC_LIST_ID)
+#### Audience ID _MC_LIST_ID_
 
 Go to https://admin.mailchimp.com/account/api/ > API Key
 
@@ -35,14 +35,16 @@ MC_API_KEY=xxx12345x1234x123xxx123xxxxx123xx-us14
 MC_LIST_ID=xxx1234xx1234
 ```
 
+## Usage
+
 Your newsletter form template can look something like this:
 
 ```html
 <form method="post">
     {{ csrfInput() }}
-    <input type="hidden" name="tags" value="Tag_1,Tag_2"> {# comma separated #}
-    <input type="text" class="form-control" name="name">
-    <input type="email" class="form-control" name="email">
+    <input type="hidden" name="tags" value="Tag_1,Tag_2">{# comma separated #}
+    <input type="text" name="name">
+    <input type="email" name="email">
     <button type="submit">Submit</button>
     <span class="notification" style="display: none"></span>
 </form>
@@ -77,4 +79,10 @@ You can use jQuery/Ajax to call plugin controller like the example below
         });
     });
 })(jQuery);
+```
+
+_Add jQuery to the template if necessary_
+
+```html
+{% js 'https://code.jquery.com/jquery-3.6.0.min.js' %}
 ```
