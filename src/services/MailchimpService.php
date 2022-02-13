@@ -19,10 +19,9 @@ class MailchimpService extends Component
     // Public Methods
     // =========================================================================
 
-    public function subscribe($data)
+    public function subscribe($data): array
     {
         if ($_POST) {
-
             if (empty($_POST["email"])) {
                 return ['success' => false, 'msg' => 'Email can\'t be empty'];
             }

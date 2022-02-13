@@ -35,11 +35,11 @@ class SimpleMailchimp extends Plugin
             return;
         }
 
-        // site routes
+        // Site routes
         Event::on(
             UrlManager::class,
             UrlManager::EVENT_REGISTER_SITE_URL_RULES,
-            function(RegisterUrlRulesEvent $event) {
+            function (RegisterUrlRulesEvent $event) {
                 $event->rules['mailchimp/send'] = 'simple-mailchimp/mailchimp/subscribe';
             }
         );
