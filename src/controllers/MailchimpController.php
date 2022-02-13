@@ -30,7 +30,6 @@ class MailchimpController extends Controller
 
     public function actionSubscribe()
     {
-        //return $this->asJson($_REQUEST);
         return $this->asJson(SimpleMailchimp::getInstance()->smcService->subscribe($_REQUEST));
     }
 }

@@ -30,56 +30,50 @@ Go to https://admin.mailchimp.com/account/api/ > API Key
 Add the credentials to your .env file
 
 ```dotenv
-MC_API_KEY=1abcdef1234a1234a0abc123ed1234aa-us14
-MC_LIST_ID=aaa123abcde
+# Mailchimp
+MC_API_KEY=xxx12345x1234x123xxx123xxxxx123xx-us14
+MC_LIST_ID=xxx1234xx1234
 ```
 
 Your newsletter form template can look something like this:
 
 ```html
-<form method="post" class="newsletter">
+<form method="post">
     {{ csrfInput() }}
     <input type="hidden" name="tags" value="Tag_1,Tag_2"> {# comma separated #}
     <input type="text" class="form-control" name="name">
     <input type="email" class="form-control" name="email">
     <button type="submit">Submit</button>
-    <span class="newsletter-notification" style="display: none"></span>
+    <span class="notification" style="display: none"></span>
 </form>
 ```
 
 _The only required field is `email`. Everything else is optional._
 
+You can use jQuery/Ajax to call plugin controller like the example below
+
 ```js
 (function($) {
-    $('form.newsletter').submit(function(e) {
+    $('form').submit(function(e) {
         e.preventDefault();
         $.post({
             url: '/mailchimp/send',
             data: $(this).serialize(),
             success: (r) => {
                 if (r.success == true) {
-                    $('.newsletter-notification')
+                    $('.notification')
                         .text(r.msg)
                         .fadeIn()
                         .delay(6000).fadeOut();
                     $(this).trigger("reset");
-                    console.log(`%c${r.msg}`, 'color:#2c8'); // testing purposes
-                    console.log(`%cID: ${r.id}`, 'color:#2c8'); // testing purposes
+                    // console.log(`%ccontact_id: ${r.id}`, 'color:#2c8');
                 } else {
-                    $('.newsletter-notification')
+                    $('.notification')
                         .text(r.msg)
                         .fadeIn()
                         .delay(6000).fadeOut();
-                    console.log(`%c${r.msg}`, 'color:#e24'); // testing purposes
                 }
-            },
-            error: (r) => {
-                $('.form-notification')
-                    .text(r.msg)
-                    .fadeIn()
-                    .delay(6000).fadeOut();
-                console.log(`%c${r.msg}`, 'color:#e24'); // testing purposes
-            },
+            }
         });
     });
 })(jQuery);
