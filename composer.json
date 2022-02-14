@@ -11,6 +11,7 @@
     }
   ],
   "require": {
+    "craftcms/cms": "^3.4.0-RC1",
     "drewm/mailchimp-api": "^2.5"
   },
   "require-dev": {

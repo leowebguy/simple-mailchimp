@@ -1,13 +1,8 @@
-# CRAFT ENVIRONMENT
-.env.php
-.env.sh
-.env
-
 # COMPOSER
 composer.lock
 /vendor
 
-# BUILD FILES
+# NPM
 /node_modules/*
 
 # MISC FILES
@@ -23,13 +18,5 @@ composer.lock
 *.tmproj
 *.tmproject
 .vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
 config.codekit3
 prepros-6.config
-.editorconfig
-
-# CUSTOM
-run.sh
