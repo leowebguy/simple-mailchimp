@@ -1,0 +1,19 @@
+{% import '_includes/forms' as forms %}
+
+{{ forms.autosuggestField({
+    first: true,
+    name: 'mcApiKey',
+    label: "Mailchimp API Key",
+    required: true,
+    suggestEnvVars: true,
+    value: settings.mcApiKey
+}) }}
+
+{{ forms.autosuggestField({
+    first: true,
+    name: 'mcListID',
+    label: "Mailchimp List ID",
+    required: true,
+    suggestEnvVars: true,
+    value: settings.mcListID
+}) }}

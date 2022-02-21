@@ -1,7 +1,7 @@
 {
   "name": "leowebguy/simple-mailchimp",
   "description": "A minimal Craft 3 plugin to connect forms to Mailchimp",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "craft-plugin",
   "license": "MIT",
   "authors": [
@@ -26,8 +26,7 @@
     "name": "Simple Mailchimp",
     "handle": "simple-mailchimp",
     "hasCpSection": false,
-    "hasCpSettings": false,
-    "changelogUrl": "https://raw.githubusercontent.com/leowebguy/simple-mailchimp/main/CHANGELOG.md",
+    "hasCpSettings": true,
     "class": "leowebguy\\simplemailchimp\\SimpleMailchimp",
     "components": {
       "smcService": "leowebguy\\simplemailchimp\\services\\MailchimpService"

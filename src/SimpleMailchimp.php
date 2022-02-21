@@ -14,6 +14,7 @@ use Craft;
 use craft\base\Plugin;
 use craft\events\RegisterUrlRulesEvent;
 use craft\web\UrlManager;
+use leowebguy\simplemailchimp\models\MailchimpModel;
 use yii\base\Event;
 
 class SimpleMailchimp extends Plugin
@@ -39,7 +40,7 @@ class SimpleMailchimp extends Plugin
         Event::on(
             UrlManager::class,
             UrlManager::EVENT_REGISTER_SITE_URL_RULES,
-            function (RegisterUrlRulesEvent $event) {
+            function(RegisterUrlRulesEvent $event) {
                 $event->rules['mailchimp/send'] = 'simple-mailchimp/mailchimp/subscribe';
             }
         );
@@ -53,5 +54,20 @@ class SimpleMailchimp extends Plugin
             ),
             __METHOD__
         );
+    }
+
+    // Public Methods
+    // =========================================================================
+
+    protected function createSettingsModel()
+    {
+        return new MailchimpModel();
+    }
+
+    protected function settingsHtml()
+    {
+        return Craft::$app->getView()->renderTemplate('simple-mailchimp/settings', [
+            'settings' => $this->getSettings(),
+        ]);
     }
 }

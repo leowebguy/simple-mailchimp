@@ -10,8 +10,9 @@
 
 namespace leowebguy\simplemailchimp\services;
 
-use craft\helpers\App;
+use Craft;
 use craft\base\Component;
+use craft\helpers\App;
 use DrewM\MailChimp\MailChimp as MC;
 
 class MailchimpService extends Component
@@ -22,6 +23,7 @@ class MailchimpService extends Component
     public function subscribe($data): array
     {
         if ($_POST) {
+
             if (empty($_POST["email"])) {
                 return ['success' => false, 'msg' => 'Email can\'t be empty'];
             }
@@ -44,18 +46,20 @@ class MailchimpService extends Component
             }
 
             try {
-                $MailChimp = new MC(App::env('MC_API_KEY'));
+                $settings = Craft::$app->plugins->getPlugin('simple-mailchimp')->getSettings();
 
-                $result = $MailChimp->post("lists/" . App::env('MC_LIST_ID') . "/members", $dataMC);
+                $MailChimp = new MC(App::parseEnv($settings['mcApiKey']));
+
+                $result = $MailChimp->post("lists/" . App::parseEnv($settings['mcListID']) . "/members", $dataMC);
 
                 if ($result['status'] == 'subscribed') {
-                    return ['success' => true, 'msg' => 'Email subscribed successfully', 'id' => $result['contact_id']];
+                    $result = ['success' => true, 'msg' => 'Email subscribed successfully', 'id' => $result['contact_id']];
                 }
             } catch (\Exception $e) {
-                $result = ['success' => false, 'msg' => $e->getResponse()];
+                $result = ['success' => false, 'msg' => $e->getMessage()];
             }
 
-            return ['success' => false, 'msg' => $result['title']];
+            return $result;
         }
 
         return ['success' => false, 'msg' => 'Direct access not allowed'];
