@@ -54,13 +54,11 @@ class MailchimpService extends Component
                 $result = $MailChimp->post("lists/" . App::parseEnv($settings['mcListID']) . "/members", $dataMC);
 
                 if ($result['status'] == 'subscribed') {
-                    $result = ['success' => true, 'msg' => 'Email subscribed successfully', 'id' => $result['contact_id']];
+                    return ['success' => true, 'msg' => 'Email subscribed successfully', 'id' => $result['contact_id']];
                 }
             } catch (\Exception $e) {
-                $result = ['success' => false, 'msg' => $e->getMessage()];
+                return ['success' => false, 'msg' => $e->getMessage()];
             }
-
-            return $result;
         }
 
         return ['success' => false, 'msg' => 'Direct access not allowed'];

@@ -16,7 +16,7 @@ class MailchimpModel extends Model
 {
     // Properties
     // =========================================================================
-    
+
     public $mcApiKey = '$MC_API_KEY';
     public $mcListID = '$MC_LIST_ID';
 }
