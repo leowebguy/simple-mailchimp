@@ -38,7 +38,8 @@ class MailchimpService extends Component
             ];
 
             if (isset($_POST["name"])) {
-                $dataMC = array_merge($dataMC, ['merge_fields' => ['FNAME' => $_POST["name"], 'LNAME' => '']]);
+                [$FNAME, $LNAME] = explode(" ", $_POST["name"]);
+                $dataMC = array_merge($dataMC, ['merge_fields' => ['FNAME' => $FNAME, 'LNAME' => $LNAME ?: '']]);
             }
 
             if (isset($_POST["tags"])) {
