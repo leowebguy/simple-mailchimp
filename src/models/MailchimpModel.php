@@ -14,6 +14,9 @@ use craft\base\Model;
 
 class MailchimpModel extends Model
 {
-    public $mcApiKey = '';
-    public $mcListID = '';
+    // Properties
+    // =========================================================================
+    
+    public $mcApiKey = '$MC_API_KEY';
+    public $mcListID = '$MC_LIST_ID';
 }

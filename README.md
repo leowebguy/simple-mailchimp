@@ -27,7 +27,11 @@ Go to https://admin.mailchimp.com/account/api/ > API Key
 
 ![Screenshot](resources/api_key.png)
 
-Add the credentials to your .env file
+Add the credentials to plugin settings
+
+![Screenshot](resources/settings.png)
+
+You may also use `.env` parameters like in the example above.
 
 ```dotenv
 # Mailchimp
