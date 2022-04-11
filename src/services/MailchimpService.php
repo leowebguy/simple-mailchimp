@@ -38,8 +38,8 @@ class MailchimpService extends Component
             ];
 
             if (isset($_POST["name"])) {
-                $NAME = array_pad(explode(" ", $_POST["name"], 2), 2, null);
-                $dataMC = array_merge($dataMC, ['merge_fields' => ['FNAME' => $NAME[0], 'LNAME' => $NAME[1] ?: '']]);
+                $name = array_pad(explode(" ", $_POST["name"], 2), 2, null);
+                $dataMC = array_merge($dataMC, ['merge_fields' => ['FNAME' => $name[0], 'LNAME' => $name[1] ?: '']]);
             }
 
             if (isset($_POST["tags"])) {
@@ -49,9 +49,9 @@ class MailchimpService extends Component
             try {
                 $settings = Craft::$app->plugins->getPlugin('simple-mailchimp')->getSettings();
 
-                $MailChimp = new MC(App::parseEnv($settings['mcApiKey']));
+                $MailChimp = new MC(App::parseEnv($settings['mcApiKey'] ?: ''));
 
-                $result = $MailChimp->post("lists/" . App::parseEnv($settings['mcListID']) . "/members", $dataMC);
+                $result = $MailChimp->post("lists/" . App::parseEnv($settings['mcListID'] ?: '') . "/members", $dataMC);
 
                 if ($result['status'] == 'subscribed') {
                     return ['success' => true, 'msg' => 'Email subscribed successfully', 'id' => $result['contact_id']];
