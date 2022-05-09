@@ -19,7 +19,7 @@
   "minimum-stability": "dev",
   "prefer-stable": true,
   "require": {
-    "craftcms/cms": "^4.0.0",
+    "craftcms/cms": "^3.0|^4.0",
     "drewm/mailchimp-api": "^2.5"
   },
   "require-dev": {
