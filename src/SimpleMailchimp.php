@@ -59,12 +59,12 @@ class SimpleMailchimp extends Plugin
     // Public Methods
     // =========================================================================
 
-    protected function createSettingsModel()
+    protected function createSettingsModel(): ?\craft\base\Model
     {
         return new MailchimpModel();
     }
 
-    protected function settingsHtml()
+    protected function settingsHtml(): ?string
     {
         return Craft::$app->getView()->renderTemplate('simple-mailchimp/settings', [
             'settings' => $this->getSettings(),

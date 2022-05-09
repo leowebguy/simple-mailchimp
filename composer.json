@@ -1,7 +1,13 @@
 {
   "name": "leowebguy/simple-mailchimp",
   "description": "A minimal Craft 3 plugin to connect forms to Mailchimp",
-  "version": "1.0.2",
+  "keywords": [
+    "craftcms",
+    "mailchimp",
+    "newsletter",
+    "mailing"
+  ],
+  "version": "1.0.3",
   "type": "craft-plugin",
   "license": "MIT",
   "authors": [
@@ -10,12 +16,17 @@
       "homepage": "https://github.com/leowebguy"
     }
   ],
+  "minimum-stability": "dev",
+  "prefer-stable": true,
   "require": {
-    "craftcms/cms": "^3.4.0-RC1",
+    "craftcms/cms": "^4.0.0",
     "drewm/mailchimp-api": "^2.5"
   },
   "require-dev": {
-    "friendsofphp/php-cs-fixer": "^2.18"
+    "craftcms/contact-form": "*",
+    "craftcms/ecs": "dev-main",
+    "craftcms/phpstan": "dev-main",
+    "craftcms/rector": "dev-main"
   },
   "autoload": {
     "psr-4": {
@@ -32,8 +43,18 @@
       "smcService": "leowebguy\\simplemailchimp\\services\\MailchimpService"
     }
   },
+  "config": {
+    "platform": {
+      "php": "8.0.2"
+    },
+    "allow-plugins": {
+      "yiisoft/yii2-composer": true,
+      "craftcms/plugin-installer": true
+    }
+  },
   "scripts": {
-    "lint": "vendor/bin/php-cs-fixer fix src --dry-run --rules=@PSR2 -vvv",
-    "lint-fix": "vendor/bin/php-cs-fixer fix src --rules=@PSR2 -vvv"
+    "check-cs": "ecs check --ansi",
+    "fix-cs": "ecs check --ansi --fix",
+    "phpstan": "phpstan --memory-limit=1G"
   }
 }
