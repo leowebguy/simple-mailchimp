@@ -23,13 +23,17 @@ class MailchimpController extends Controller
     // Public Properties
     // =========================================================================
 
-    public $enableCsrfValidation = true;
+    //public $enableCsrfValidation = true;
 
     // Public Methods
     // =========================================================================
 
-    public function actionSubscribe()
+    public function actionSubscribe(): \yii\web\Response|array
     {
-        return $this->asJson(SimpleMailchimp::getInstance()->smcService->subscribe($_REQUEST));
+        if ($_POST) {
+            return $this->asJson(SimpleMailchimp::getInstance()->smcService->subscribe($_POST));
+        }
+
+        return $this->asJson(['success' => false, 'msg' => 'Direct access not allowed']);
     }
 }
