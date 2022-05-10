@@ -18,7 +18,7 @@ class MailchimpController extends Controller
     // Protected Properties
     // =========================================================================
 
-    protected array|int|bool $allowAnonymous = true;
+    protected int|bool|array $allowAnonymous = true;
 
     // Public Properties
     // =========================================================================
