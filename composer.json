@@ -1,13 +1,13 @@
 {
   "name": "leowebguy/simple-mailchimp",
-  "description": "A minimal Craft 3 plugin to connect forms to Mailchimp",
+  "description": "A minimal Craft 4 plugin to connect forms to Mailchimp",
   "keywords": [
     "craftcms",
     "mailchimp",
     "newsletter",
     "mailing"
   ],
-  "version": "1.0.3",
+  "version": "2.0.0",
   "type": "craft-plugin",
   "license": "MIT",
   "authors": [
@@ -19,7 +19,7 @@
   "minimum-stability": "dev",
   "prefer-stable": true,
   "require": {
-    "craftcms/cms": "^3.0|^4.0",
+    "craftcms/cms": "^4.0",
     "drewm/mailchimp-api": "^2.5"
   },
   "require-dev": {

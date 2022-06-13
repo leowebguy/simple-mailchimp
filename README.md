@@ -1,7 +1,7 @@
-Simple Mailchimp plugin for Craft 3
+Simple Mailchimp plugin for Craft 4
 ===
 
-A minimal Craft 3 plugin to connect forms to Mailchimp
+A minimal Craft 4 plugin to connect forms to Mailchimp
 
 ## Installation
 

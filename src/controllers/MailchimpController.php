@@ -1,6 +1,6 @@
 <?php
 /**
- * A minimal Craft 3 plugin to connect forms to Mailchimp
+ * A minimal Craft 4 plugin to connect forms to Mailchimp
  *
  * @author     Leo Leoncio
  * @see        https://github.com/leowebguy
@@ -18,7 +18,7 @@ class MailchimpController extends Controller
     // Protected Properties
     // =========================================================================
 
-    protected $allowAnonymous = true;
+    protected array|int|bool $allowAnonymous = true;
 
     // Public Properties
     // =========================================================================
