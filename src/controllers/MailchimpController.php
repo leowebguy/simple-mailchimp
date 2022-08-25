@@ -1,6 +1,6 @@
 <?php
 /**
- * A minimal Craft 4 plugin to connect forms to Mailchimp
+ * A minimal Craft plugin to connect forms to Mailchimp
  *
  * @author     Leo Leoncio
  * @see        https://github.com/leowebguy
@@ -12,23 +12,19 @@ namespace leowebguy\simplemailchimp\controllers;
 
 use craft\web\Controller;
 use leowebguy\simplemailchimp\SimpleMailchimp;
+use yii\web\Response;
 
 class MailchimpController extends Controller
 {
     // Protected Properties
     // =========================================================================
 
-    protected array|int|bool $allowAnonymous = true;
-
-    // Public Properties
-    // =========================================================================
-
-    //public $enableCsrfValidation = true;
+    protected $allowAnonymous = true;
 
     // Public Methods
     // =========================================================================
 
-    public function actionSubscribe(): \yii\web\Response|array
+    public function actionSubscribe(): Response
     {
         if ($_POST) {
             return $this->asJson(SimpleMailchimp::getInstance()->smcService->subscribe($_POST));

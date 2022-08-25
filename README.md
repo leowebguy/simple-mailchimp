@@ -1,9 +1,25 @@
-Simple Mailchimp plugin for Craft 4
+Simple Mailchimp plugin for Craft
 ===
 
-A minimal Craft 4 plugin to connect forms to Mailchimp
+A minimal Craft plugin to connect forms to Mailchimp
 
-### Important: Lock composer on `"leowebguy/simple-mailchimp": "1.0.2"` if you're using Craft3/PHP7.4 ###
+### IMPORTANT
+
+_Craft 3_
+
+```json
+"require": {
+   "leowebguy/craft-currency-converter": "1.0.2",
+}
+```
+
+_Craft 4_
+
+```json
+"require": {
+   "leowebguy/craft-currency-converter": "^2.0.0",
+}
+```
 
 ---
 

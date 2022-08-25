@@ -1,6 +1,6 @@
 <?php
 /**
- * A minimal Craft 4 plugin to connect forms to Mailchimp
+ * A minimal Craft plugin to connect forms to Mailchimp
  *
  * @author     Leo Leoncio
  * @see        https://github.com/leowebguy
@@ -11,6 +11,7 @@
 namespace leowebguy\simplemailchimp;
 
 use Craft;
+use craft\base\Model;
 use craft\base\Plugin;
 use craft\events\RegisterUrlRulesEvent;
 use craft\web\UrlManager;
@@ -19,7 +20,7 @@ use yii\base\Event;
 
 class SimpleMailchimp extends Plugin
 {
-    // Public Properties
+    // Properties
     // =========================================================================
 
     public static $plugin;
@@ -36,7 +37,7 @@ class SimpleMailchimp extends Plugin
             return;
         }
 
-        // Site routes
+        // site routes
         Event::on(
             UrlManager::class,
             UrlManager::EVENT_REGISTER_SITE_URL_RULES,
@@ -47,19 +48,15 @@ class SimpleMailchimp extends Plugin
 
         // log info
         Craft::info(
-            Craft::t(
-                'simple-mailchimp',
-                '{name} plugin loaded',
-                ['name' => $this->name]
-            ),
+            'Simple Mailchimp plugin loaded',
             __METHOD__
         );
     }
 
-    // Public Methods
+    // Protected Methods
     // =========================================================================
 
-    protected function createSettingsModel(): ?\craft\base\Model
+    protected function createSettingsModel(): ?Model
     {
         return new MailchimpModel();
     }

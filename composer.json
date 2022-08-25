@@ -1,13 +1,13 @@
 {
   "name": "leowebguy/simple-mailchimp",
-  "description": "A minimal Craft 4 plugin to connect forms to Mailchimp",
+  "description": "A minimal Craft plugin to connect forms to Mailchimp",
   "keywords": [
     "craftcms",
     "mailchimp",
     "newsletter",
     "mailing"
   ],
-  "version": "2.0.0",
+  "version": "2.0.1",
   "type": "craft-plugin",
   "license": "MIT",
   "authors": [
@@ -19,11 +19,10 @@
   "minimum-stability": "dev",
   "prefer-stable": true,
   "require": {
-    "craftcms/cms": "^4.0",
+    "craftcms/cms": "^3.0|^4.0",
     "drewm/mailchimp-api": "^2.5"
   },
   "require-dev": {
-    "craftcms/contact-form": "*",
     "craftcms/ecs": "dev-main",
     "craftcms/phpstan": "dev-main",
     "craftcms/rector": "dev-main"
@@ -53,8 +52,8 @@
     }
   },
   "scripts": {
-    "check-cs": "ecs check --ansi",
-    "fix-cs": "ecs check --ansi --fix",
-    "phpstan": "phpstan --memory-limit=1G"
+    "check-cs": "vendor/bin/ecs check src --ansi",
+    "fix-cs": "vendor/bin/ecs check src --ansi --fix",
+    "phpstan": "vendor/bin/phpstan analyse src"
   }
 }

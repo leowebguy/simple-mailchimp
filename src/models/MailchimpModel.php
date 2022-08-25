@@ -1,6 +1,6 @@
 <?php
 /**
- * A minimal Craft 4 plugin to connect forms to Mailchimp
+ * A minimal Craft plugin to connect forms to Mailchimp
  *
  * @author     Leo Leoncio
  * @see        https://github.com/leowebguy
