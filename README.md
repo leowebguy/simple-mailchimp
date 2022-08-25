@@ -3,24 +3,6 @@ Simple Mailchimp plugin for Craft
 
 A minimal Craft plugin to connect forms to Mailchimp
 
-### IMPORTANT
-
-_Craft 3_
-
-```json
-"require": {
-   "leowebguy/craft-currency-converter": "1.0.2",
-}
-```
-
-_Craft 4_
-
-```json
-"require": {
-   "leowebguy/craft-currency-converter": "^2.0.0",
-}
-```
-
 ---
 
 ## Installation
@@ -70,7 +52,6 @@ Your newsletter form template can look something like this:
     <input type="text" name="name">
     <input type="email" name="email">
     <button type="submit">Submit</button>
-    <span class="notification" style="display: none"></span>
 </form>
 ```
 
@@ -79,24 +60,24 @@ _The only required field is `email`. Everything else is optional._
 You can use jQuery/Ajax to call plugin controller like the example below
 
 ```js
-(function($) {
-    $('form').submit(function(e) {
+(($) => {
+    $('form').submit((e) => {
         e.preventDefault();
         $.post({
             url: '/mailchimp/send',
             data: $(this).serialize(),
             success: (r) => {
                 if (r.success == true) {
-                    $('.notification')
-                        .text(r.msg)
-                        .fadeIn()
+                    $('form')
+                        .append(`<div class='success'>${r.msg}</div>`)
+                        .hide().fadeIn()
                         .delay(6000).fadeOut();
+
                     $(this).trigger("reset");
-                    // console.log(`%ccontact_id: ${r.id}`, 'color:#2c8');
                 } else {
-                    $('.notification')
-                        .text(r.msg)
-                        .fadeIn()
+                    $('form')
+                        .append(`<div class='error'>${r.msg}</div>`)
+                        .hide().fadeIn()
                         .delay(6000).fadeOut();
                 }
             }
