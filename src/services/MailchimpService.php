@@ -15,6 +15,9 @@ use craft\base\Component;
 use craft\helpers\App;
 use DrewM\MailChimp\MailChimp as MC;
 
+/*
+ * Class MailchimpService
+ */
 class MailchimpService extends Component
 {
     // Public Methods

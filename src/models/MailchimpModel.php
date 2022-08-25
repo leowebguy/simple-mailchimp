@@ -12,6 +12,9 @@ namespace leowebguy\simplemailchimp\models;
 
 use craft\base\Model;
 
+/*
+ * Class MailchimpModel
+ */
 class MailchimpModel extends Model
 {
     // Properties

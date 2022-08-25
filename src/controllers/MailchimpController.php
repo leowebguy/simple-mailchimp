@@ -14,6 +14,9 @@ use craft\web\Controller;
 use leowebguy\simplemailchimp\SimpleMailchimp;
 use yii\web\Response;
 
+/*
+ * Class MailchimpController
+ */
 class MailchimpController extends Controller
 {
     // Protected Properties

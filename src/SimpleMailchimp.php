@@ -18,6 +18,9 @@ use craft\web\UrlManager;
 use leowebguy\simplemailchimp\models\MailchimpModel;
 use yii\base\Event;
 
+/*
+ * Class SimpleMailchimp
+ */
 class SimpleMailchimp extends Plugin
 {
     // Properties
