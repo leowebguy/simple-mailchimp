@@ -2,10 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## 2.0.1 - 2022.08.24
-### PHP 8.0 | Craft 4
-
-## 2.0.0 - 2022.06.13
+## 1.0.4 - 2022.08.24
 ### PHP 8.0 | Craft 4
 
 ## 1.0.2 - 2022.04.10
