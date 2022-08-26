@@ -7,7 +7,7 @@
     "newsletter",
     "mailing"
   ],
-  "version": "1.0.4",
+  "version": "2.0.0",
   "type": "craft-plugin",
   "license": "MIT",
   "authors": [
@@ -19,7 +19,8 @@
   "minimum-stability": "dev",
   "prefer-stable": true,
   "require": {
-    "craftcms/cms": "^3.0|^4.0",
+    "php": "^8.0.2",
+    "craftcms/cms": "^4.0",
     "drewm/mailchimp-api": "^2.5"
   },
   "require-dev": {
@@ -54,6 +55,7 @@
   "scripts": {
     "check-cs": "vendor/bin/ecs check src --ansi",
     "fix-cs": "vendor/bin/ecs check src --ansi --fix",
-    "phpstan": "vendor/bin/phpstan analyse src"
+    "phpstan": "vendor/bin/phpstan analyse src",
+    "rector": "vendor/bin/rector process src --config vendor/craftcms/rector/sets/craft-cms-40.php"
   }
 }

@@ -2,8 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
-## 1.0.4 - 2022.08.24
+## 2.0.0 - 2022.08.26
 ### PHP 8.0 | Craft 4
+
+## 1.0.4 - 2022.08.24
+### Cleanup
 
 ## 1.0.2 - 2022.04.10
 ### Fix array issue
