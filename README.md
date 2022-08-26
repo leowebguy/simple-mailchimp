@@ -5,6 +5,26 @@ A minimal Craft plugin to connect forms to Mailchimp
 
 ---
 
+## Composer | Important
+
+Craft 4
+
+```json
+"require": {
+   "leowebguy/simple-mailchimp": "^2.0",
+}
+```
+
+Craft 3
+
+```json
+"require": {
+   "leowebguy/simple-mailchimp": "^1.0.4",
+}
+```
+
+---
+
 ## Installation
 
 ```bash
@@ -45,7 +65,7 @@ MC_LIST_ID=xxx1234xx1234
 
 Your newsletter form template can look something like this:
 
-```html
+```twig
 <form method="post">
     {{ csrfInput() }}
     <input type="hidden" name="tags" value="Tag_1,Tag_2">{# comma separated #}
@@ -88,6 +108,6 @@ You can use jQuery/Ajax to call plugin controller like the example below
 
 _Add jQuery to the template if necessary_
 
-```html
+```twig
 {% js 'https://code.jquery.com/jquery-3.6.0.min.js' %}
 ```
