@@ -56,7 +56,6 @@ class MailchimpService extends Component
         if(isset($data['tags'])) {
            unset($data['tags']); 
         }
-
         if(isset($data['CRAFT_CSRF_TOKEN'])) {
            unset($data['CRAFT_CSRF_TOKEN']); 
         }
