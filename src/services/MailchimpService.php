@@ -47,6 +47,27 @@ class MailchimpService extends Component
             $dataMC = array_merge($dataMC, ['tags' => explode(',', $data["tags"])]);
         }
 
+        if(isset($data['email'])) {
+           unset($data['email']); 
+        }
+        if(isset($data['name'])) {
+           unset($data['name']); 
+        }
+        if(isset($data['tags'])) {
+           unset($data['tags']); 
+        }
+
+        if(isset($data['CRAFT_CSRF_TOKEN'])) {
+           unset($data['CRAFT_CSRF_TOKEN']); 
+        }
+
+        if(!empty($data)) {
+            if(!isset($dataMC['merge_fields'])) {
+                $dataMC['merge_fields'] = [];
+            }
+            $dataMC['merge_fields'] = $data;
+        }
+
         try {
             $settings = Craft::$app->plugins->getPlugin('simple-mailchimp')->getSettings();
 
