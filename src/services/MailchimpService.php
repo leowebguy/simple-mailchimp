@@ -68,31 +68,31 @@ class MailchimpService extends Component
 
         $address2 = '';
         if(isset($data['address2'])) {
-            $address = $data['address2'];
+            $address2 = $data['address2'];
             unset($data['address2']);
         }
 
         $city = '';
         if(isset($data['city'])) {
-            $address = $data['city'];
+            $city = $data['city'];
             unset($data['city']);
         }
 
         $state = '';
         if(isset($data['state'])) {
-            $address = $data['state'];
+            $state = $data['state'];
             unset($data['state']);
         }
 
         $zip = '';
         if(isset($data['zip'])) {
-            $address = $data['zip'];
+            $zip = $data['zip'];
             unset($data['zip']);
         }
 
         $country = '';
         if(isset($data['country'])) {
-            $address = $data['country'];
+            $country = $data['country'];
             unset($data['country']);
         }
 
