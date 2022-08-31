@@ -60,11 +60,58 @@ class MailchimpService extends Component
            unset($data['CRAFT_CSRF_TOKEN']); 
         }
 
+        $address1 = '';
+        if(isset($data['address1'])) {
+            $address1 = $data['address1'];
+            unset($data['address1']);
+        }
+
+        $address2 = '';
+        if(isset($data['address2'])) {
+            $address = $data['address2'];
+            unset($data['address2']);
+        }
+
+        $city = '';
+        if(isset($data['city'])) {
+            $address = $data['city'];
+            unset($data['city']);
+        }
+
+        $state = '';
+        if(isset($data['state'])) {
+            $address = $data['state'];
+            unset($data['state']);
+        }
+
+        $zip = '';
+        if(isset($data['zip'])) {
+            $address = $data['zip'];
+            unset($data['zip']);
+        }
+
+        $country = '';
+        if(isset($data['country'])) {
+            $address = $data['country'];
+            unset($data['country']);
+        }
+
         if(!empty($data)) {
             if(!isset($dataMC['merge_fields'])) {
                 $dataMC['merge_fields'] = [];
             }
             $dataMC['merge_fields'] = $data;
+
+            if(!empty($address1) || !empty($address2) || !empty($city) || !empty($state) || !empty($zip) || !empty($country)) {
+                $dataMC['merge_fields']['ADDRESS'] = [
+                    'addr1'   => $address1,
+                    'addr2'   => $address2,
+                    'city'    => $city,
+                    'state'   => $state,
+                    'zip'     => $zip,
+                    'country' => $country
+                ];
+            }
         }
 
         try {
