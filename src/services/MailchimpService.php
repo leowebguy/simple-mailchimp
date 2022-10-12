@@ -1,4 +1,5 @@
 <?php
+
 /**
  * A minimal Craft plugin to connect forms to Mailchimp
  *
@@ -18,12 +19,13 @@ use DrewM\MailChimp\MailChimp as MC;
 /*
  * Class MailchimpService
  */
+
 class MailchimpService extends Component
 {
     // Public Methods
     // =========================================================================
 
-    public function subscribe($data): array
+    public function subscribe(array $data, bool $upsert = false): array
     {
         if (empty($data["email"])) {
             return ['success' => false, 'msg' => 'Email can\'t be empty'];
@@ -52,14 +54,18 @@ class MailchimpService extends Component
 
             $MailChimp = new MC(App::parseEnv($settings['mcApiKey'] ?: ''));
 
-            $result = $MailChimp->post("lists/" . App::parseEnv($settings['mcListID'] ?: '') . "/members", $dataMC);
+            if ($upsert) {
+                $result = $MailChimp->put("lists/" . App::parseEnv($settings['mcListID'] ?: '') . "/members/" . md5($data["email"]), $dataMC);
+            } else {
+                $result = $MailChimp->post("lists/" . App::parseEnv($settings['mcListID'] ?: '') . "/members", $dataMC);
+            }
+
 
             if ($result['status'] == 'subscribed') {
                 return ['success' => true, 'msg' => 'Email subscribed successfully', 'id' => $result['contact_id']];
             }
 
             return ['success' => false, 'msg' => 'Mailchimp error: ' . $result['title']];
-
         } catch (\Exception $e) {
             return ['success' => false, 'msg' => $e->getMessage()];
         }
