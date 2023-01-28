@@ -10,16 +10,14 @@
 
 namespace leowebguy\simplemailchimp\controllers;
 
+use Craft;
 use craft\web\Controller;
 use leowebguy\simplemailchimp\SimpleMailchimp;
 use yii\web\Response;
 
-/*
- * Class MailchimpController
- */
 class MailchimpController extends Controller
 {
-    // Protected Properties
+    // Properties
     // =========================================================================
 
     protected int|bool|array $allowAnonymous = true;
@@ -27,12 +25,21 @@ class MailchimpController extends Controller
     // Public Methods
     // =========================================================================
 
+    /**
+     * @return Response
+     */
     public function actionSubscribe(): Response
     {
-        if ($_POST) {
-            return $this->asJson(SimpleMailchimp::getInstance()->smcService->subscribe($_POST));
+        if (!Craft::$app->request->getIsPost()) {
+            return $this->asJson(
+                ['success' => false, 'msg' => 'Endpoint only accepts $_POST']
+            );
         }
 
-        return $this->asJson(['success' => false, 'msg' => 'Direct access not allowed']);
+        return $this->asJson(
+            SimpleMailchimp::$plugin->smcService->subscribe(
+                Craft::$app->request->post()
+            )
+        );
     }
 }

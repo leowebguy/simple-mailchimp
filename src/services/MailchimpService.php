@@ -15,14 +15,15 @@ use craft\base\Component;
 use craft\helpers\App;
 use DrewM\MailChimp\MailChimp as MC;
 
-/*
- * Class MailchimpService
- */
 class MailchimpService extends Component
 {
     // Public Methods
     // =========================================================================
 
+    /**
+     * @param $data
+     * @return array
+     */
     public function subscribe($data): array
     {
         if (empty($data["email"])) {
@@ -48,6 +49,7 @@ class MailchimpService extends Component
         }
 
         try {
+
             $settings = Craft::$app->plugins->getPlugin('simple-mailchimp')->getSettings();
 
             $MailChimp = new MC(App::parseEnv($settings['mcApiKey'] ?: ''));

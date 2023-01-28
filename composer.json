@@ -36,12 +36,7 @@
   "extra": {
     "name": "Simple Mailchimp",
     "handle": "simple-mailchimp",
-    "hasCpSection": false,
-    "hasCpSettings": true,
-    "class": "leowebguy\\simplemailchimp\\SimpleMailchimp",
-    "components": {
-      "smcService": "leowebguy\\simplemailchimp\\services\\MailchimpService"
-    }
+    "class": "leowebguy\\simplemailchimp\\SimpleMailchimp"
   },
   "config": {
     "platform": {

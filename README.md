@@ -66,7 +66,7 @@ MC_LIST_ID=xxx1234xx1234
 Your newsletter form template can look something like this:
 
 ```twig
-<form method="post">
+<form method="post" id="mailchimp">
     {{ csrfInput() }}
     <input type="hidden" name="tags" value="Tag_1,Tag_2">{# comma separated #}
     <input type="text" name="name">
@@ -75,39 +75,51 @@ Your newsletter form template can look something like this:
 </form>
 ```
 
-_The only required field is `email`. Everything else is optional._
+_The only required field is `email`, all the rest is optional_
 
-You can use jQuery/Ajax to call plugin controller like the example below
+use the vanilla js example below:
 
 ```js
-(($) => {
-    $('form').submit((e) => {
-        e.preventDefault();
-        $.post({
-            url: '/mailchimp/send',
-            data: $(this).serialize(),
-            success: (r) => {
-                if (r.success == true) {
-                    $('form')
-                        .append(`<div class='success'>${r.msg}</div>`)
-                        .hide().fadeIn()
-                        .delay(6000).fadeOut();
-
-                    $(this).trigger("reset");
-                } else {
-                    $('form')
-                        .append(`<div class='error'>${r.msg}</div>`)
-                        .hide().fadeIn()
-                        .delay(6000).fadeOut();
-                }
-            }
-        });
+const form = document.getElementById('#mailchimp')
+form.onsubmit = (e) => {
+    e.preventDefault();
+    fetch('/mailchimp/send', {
+        method: 'post',
+        body: new FormData(this)
+    })
+    .then((r) => r.json())
+    .then((r) => {
+        if (r.success) {
+            alert(r.msg)
+        } else {
+            alert(r.msg)
+        }
+    })
+    .catch((e) => {
+        console.error(e);
     });
-})(jQuery);
+};
 ```
 
-_Add jQuery to the template if necessary_
+or jquery/ajax...
 
-```twig
-{% js 'https://code.jquery.com/jquery-3.6.0.min.js' %}
+```js
+$('form#mailchimp').submit((e) => {
+    e.preventDefault();
+    $.post({
+        url: '/mailchimp/send',
+        data: $(this).serialize(),
+        success: (r) => {
+            if (r.success) {
+                alert(r.msg)
+            } else {
+                alert(r.msg)
+            }
+        },
+        error: (e) => {
+            console.error(e);
+        }
+    });
+});
 ```
+

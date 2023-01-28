@@ -12,14 +12,11 @@ namespace leowebguy\simplemailchimp\models;
 
 use craft\base\Model;
 
-/*
- * Class MailchimpModel
- */
 class MailchimpModel extends Model
 {
     // Properties
     // =========================================================================
 
-    public $mcApiKey = '$MC_API_KEY';
-    public $mcListID = '$MC_LIST_ID';
+    public string $mcApiKey = '$MC_API_KEY';
+    public string $mcListID = '$MC_LIST_ID';
 }

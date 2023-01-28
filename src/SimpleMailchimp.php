@@ -16,17 +16,23 @@ use craft\base\Plugin;
 use craft\events\RegisterUrlRulesEvent;
 use craft\web\UrlManager;
 use leowebguy\simplemailchimp\models\MailchimpModel;
+use leowebguy\simplemailchimp\services\MailchimpService;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 use yii\base\Event;
+use yii\base\Exception;
 
-/*
- * Class SimpleMailchimp
- */
 class SimpleMailchimp extends Plugin
 {
     // Properties
     // =========================================================================
 
-    public static $plugin;
+    public static mixed $plugin;
+
+    public bool $hasCpSection = false;
+
+    public bool $hasCpSettings = true;
 
     // Public Methods
     // =========================================================================
@@ -39,6 +45,10 @@ class SimpleMailchimp extends Plugin
         if (!$this->isInstalled) {
             return;
         }
+
+        $this->setComponents([
+            'smcService' => MailchimpService::class
+        ]);
 
         // site routes
         Event::on(
@@ -59,11 +69,21 @@ class SimpleMailchimp extends Plugin
     // Protected Methods
     // =========================================================================
 
+    /**
+     * @return Model|null
+     */
     protected function createSettingsModel(): ?Model
     {
         return new MailchimpModel();
     }
 
+    /**
+     * @return string|null
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
+     * @throws Exception
+     */
     protected function settingsHtml(): ?string
     {
         return Craft::$app->getView()->renderTemplate('simple-mailchimp/settings', [
