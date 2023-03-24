@@ -2,9 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.0.2 - 2023.03.23
+### Cleanup, PHP 8.2
+
 ## 2.0.1 - 2023.01.28
 ### Readme and more
-++ vanilla js examples
+++ vanilla js example
 ++ better phpDoc
 ++ change $_POST to Craft::$app->request->post() < better
 

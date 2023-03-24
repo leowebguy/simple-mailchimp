@@ -68,7 +68,7 @@ Your newsletter form template can look something like this:
 ```twig
 <form method="post" id="mailchimp">
     {{ csrfInput() }}
-    <input type="hidden" name="tags" value="Tag_1,Tag_2">{# comma separated #}
+    <input type="hidden" name="tags" value="Tag_1,Tag_2">
     <input type="text" name="name">
     <input type="email" name="email">
     <button type="submit">Submit</button>

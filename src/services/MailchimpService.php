@@ -14,6 +14,7 @@ use Craft;
 use craft\base\Component;
 use craft\helpers\App;
 use DrewM\MailChimp\MailChimp as MC;
+use Exception;
 
 class MailchimpService extends Component
 {
@@ -61,8 +62,7 @@ class MailchimpService extends Component
             }
 
             return ['success' => false, 'msg' => 'Mailchimp error: ' . $result['title']];
-
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return ['success' => false, 'msg' => $e->getMessage()];
         }
     }
