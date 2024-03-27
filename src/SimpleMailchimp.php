@@ -60,15 +60,15 @@ class SimpleMailchimp extends Plugin
      */
     protected function createSettingsModel(): ?Model
     {
-        return new MailchimpModel();
+        return new MailchimpModel;
     }
 
     /**
-     * @return string|null
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
      * @throws Exception
+     * @return string|null
      */
     protected function settingsHtml(): ?string
     {
