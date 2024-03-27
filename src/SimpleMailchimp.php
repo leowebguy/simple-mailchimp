@@ -4,8 +4,7 @@
  *
  * @author     Leo Leoncio
  * @see        https://github.com/leowebguy
- * @copyright  Copyright (c) 2021, leowebguy
- * @license    MIT
+ * @copyright  Copyright (c) 2024, leowebguy
  */
 
 namespace leowebguy\simplemailchimp;
@@ -25,22 +24,13 @@ use yii\base\Exception;
 
 class SimpleMailchimp extends Plugin
 {
-    // Properties
-    // =========================================================================
-
-    public static mixed $plugin;
-
     public bool $hasCpSection = false;
 
     public bool $hasCpSettings = true;
 
-    // Public Methods
-    // =========================================================================
-
     public function init()
     {
         parent::init();
-        self::$plugin = $this;
 
         if (!$this->isInstalled) {
             return;
@@ -50,7 +40,6 @@ class SimpleMailchimp extends Plugin
             'smcService' => MailchimpService::class
         ]);
 
-        // site routes
         Event::on(
             UrlManager::class,
             UrlManager::EVENT_REGISTER_SITE_URL_RULES,
@@ -65,9 +54,6 @@ class SimpleMailchimp extends Plugin
             __METHOD__
         );
     }
-
-    // Protected Methods
-    // =========================================================================
 
     /**
      * @return Model|null

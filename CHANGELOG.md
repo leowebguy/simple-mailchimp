@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+## 3.0.0 - 2024.03.26
+### Craft 5, PHP 8.2
+
 ## 2.0.2 - 2023.03.23
 ### Cleanup, PHP 8.2
 

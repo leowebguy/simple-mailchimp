@@ -4,8 +4,7 @@
  *
  * @author     Leo Leoncio
  * @see        https://github.com/leowebguy
- * @copyright  Copyright (c) 2021, leowebguy
- * @license    MIT
+ * @copyright  Copyright (c) 2024, leowebguy
  */
 
 namespace leowebguy\simplemailchimp\services;
@@ -18,9 +17,6 @@ use Exception;
 
 class MailchimpService extends Component
 {
-    // Public Methods
-    // =========================================================================
-
     /**
      * @param $data
      * @return array
@@ -50,17 +46,12 @@ class MailchimpService extends Component
         }
 
         try {
-
             $settings = Craft::$app->plugins->getPlugin('simple-mailchimp')->getSettings();
-
             $MailChimp = new MC(App::parseEnv($settings['mcApiKey'] ?: ''));
-
             $result = $MailChimp->post("lists/" . App::parseEnv($settings['mcListID'] ?: '') . "/members", $dataMC);
-
             if ($result['status'] == 'subscribed') {
                 return ['success' => true, 'msg' => 'Email subscribed successfully', 'id' => $result['contact_id']];
             }
-
             return ['success' => false, 'msg' => 'Mailchimp error: ' . $result['title']];
         } catch (Exception $e) {
             return ['success' => false, 'msg' => $e->getMessage()];

@@ -7,9 +7,17 @@ A minimal Craft plugin to connect forms to Mailchimp
 
 ## Composer | Important
 
+Craft 5
+
+```
+"require": {
+"leowebguy/simple-mailchimp": "^3.0",
+}
+```
+
 Craft 4
 
-```json
+```
 "require": {
    "leowebguy/simple-mailchimp": "^2.0",
 }
@@ -17,7 +25,7 @@ Craft 4
 
 Craft 3
 
-```json
+```
 "require": {
    "leowebguy/simple-mailchimp": "^1.0.4",
 }

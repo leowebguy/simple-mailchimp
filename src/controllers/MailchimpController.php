@@ -4,8 +4,7 @@
  *
  * @author     Leo Leoncio
  * @see        https://github.com/leowebguy
- * @copyright  Copyright (c) 2021, leowebguy
- * @license    MIT
+ * @copyright  Copyright (c) 2024, leowebguy
  */
 
 namespace leowebguy\simplemailchimp\controllers;
@@ -17,17 +16,8 @@ use yii\web\Response;
 
 class MailchimpController extends Controller
 {
-    // Properties
-    // =========================================================================
-
     protected int|bool|array $allowAnonymous = true;
 
-    // Public Methods
-    // =========================================================================
-
-    /**
-     * @return Response
-     */
     public function actionSubscribe(): Response
     {
         if (!Craft::$app->request->getIsPost()) {
@@ -37,7 +27,7 @@ class MailchimpController extends Controller
         }
 
         return $this->asJson(
-            SimpleMailchimp::$plugin->smcService->subscribe(
+            SimpleMailchimp::getInstance()->smcService->subscribe(
                 Craft::$app->request->post()
             )
         );
