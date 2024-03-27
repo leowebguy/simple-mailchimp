@@ -10,12 +10,10 @@
   "version": "3.0.0",
   "type": "craft-plugin",
   "license": "proprietary",
-  "authors": [
-    {
-      "name": "Leo",
-      "homepage": "https://github.com/leowebguy"
-    }
-  ],
+  "author": {
+    "name": "Leo",
+    "homepage": "https://github.com/leowebguy"
+  },
   "minimum-stability": "dev",
   "prefer-stable": true,
   "require": {
