@@ -17,3 +17,10 @@
     suggestEnvVars: true,
     value: settings.mcListID
 }) }}
+
+{{ forms.lightswitchField({
+    first: true,
+    name: 'optIn',
+    label: 'Double Opt-in',
+    on: settings.optIn,
+}) }}
