@@ -15,4 +15,5 @@ class MailchimpModel extends Model
 {
     public string $mcApiKey = '$MC_API_KEY';
     public string $mcListID = '$MC_LIST_ID';
+    public string $optIn = '0';
 }

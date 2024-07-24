@@ -23,6 +23,8 @@ class MailchimpService extends Component
      */
     public function subscribe($data): array
     {
+        $settings = Craft::$app->plugins->getPlugin('simple-mailchimp')->getSettings();
+
         if (empty($data["email"])) {
             return ['success' => false, 'msg' => 'Email can\'t be empty'];
         }
@@ -33,12 +35,13 @@ class MailchimpService extends Component
 
         $dataMC = [
             'email_address' => $data["email"],
-            'status' => 'subscribed'
+            'status' => $settings['optIn'] ? 'pending' : 'subscribed',
+            'double_optin' => (bool)$settings['optIn']
         ];
 
         if (isset($data["name"])) {
             $name = array_pad(explode(" ", $data["name"], 2), 2, null);
-            $dataMC = array_merge($dataMC, ['merge_fields' => ['FNAME' => $name[0], 'LNAME' => $name[1] ?: '']]);
+            $dataMC = array_merge($dataMC, ['merge_fields' => ['FNAME' => $name[0], 'LNAME' => $name[1] ?? '']]);
         }
 
         if (isset($data["tags"])) {
@@ -46,9 +49,8 @@ class MailchimpService extends Component
         }
 
         try {
-            $settings = Craft::$app->plugins->getPlugin('simple-mailchimp')->getSettings();
-            $MailChimp = new MC(App::parseEnv($settings['mcApiKey'] ?: ''));
-            $result = $MailChimp->post("lists/" . App::parseEnv($settings['mcListID'] ?: '') . "/members", $dataMC);
+            $MailChimp = new MC(App::parseEnv($settings['mcApiKey'] ?? ''));
+            $result = $MailChimp->post("lists/" . App::parseEnv($settings['mcListID'] ?? '') . "/members", $dataMC);
             if ($result['status'] == 'subscribed') {
                 return ['success' => true, 'msg' => 'Email subscribed successfully', 'id' => $result['contact_id']];
             }
