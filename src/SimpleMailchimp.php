@@ -1,4 +1,5 @@
 <?php
+
 /**
  * A minimal Craft plugin to connect forms to Mailchimp
  *
@@ -16,60 +17,62 @@ use craft\events\RegisterUrlRulesEvent;
 use craft\web\UrlManager;
 use leowebguy\simplemailchimp\models\MailchimpModel;
 use leowebguy\simplemailchimp\services\MailchimpService;
-use Twig\Error\LoaderError;
-use Twig\Error\RuntimeError;
-use Twig\Error\SyntaxError;
 use yii\base\Event;
-use yii\base\Exception;
 
+/**
+ * Simple Mailchimp plugin
+ *
+ * @method static SimpleMailchimp|null getInstance()
+ * @property-read MailchimpService $smcService
+ */
 class SimpleMailchimp extends Plugin
 {
+    public static ?SimpleMailchimp $plugin = null;
+
     public bool $hasCpSection = false;
 
     public bool $hasCpSettings = true;
 
-    public function init()
+    public function init(): void
     {
         parent::init();
+        self::$plugin = $this;
 
         if (!$this->isInstalled) {
             return;
         }
 
         $this->setComponents([
-            'smcService' => MailchimpService::class
+            'smcService' => MailchimpService::class,
         ]);
 
         Event::on(
             UrlManager::class,
             UrlManager::EVENT_REGISTER_SITE_URL_RULES,
-            static function(RegisterUrlRulesEvent $event) {
+            static function (RegisterUrlRulesEvent $event): void {
                 $event->rules['mailchimp/send'] = 'simple-mailchimp/mailchimp/subscribe';
             }
         );
 
-        // log info
         Craft::info(
             'Simple Mailchimp plugin loaded',
             __METHOD__
         );
     }
 
-    /**
-     * @return Model|null
-     */
     protected function createSettingsModel(): ?Model
     {
-        return new MailchimpModel;
+        return new MailchimpModel();
     }
 
-    /**
-     * @throws LoaderError
-     * @throws RuntimeError
-     * @throws SyntaxError
-     * @throws Exception
-     * @return string|null
-     */
+    public function getSettings(): ?MailchimpModel
+    {
+        /** @var MailchimpModel|null $settings */
+        $settings = parent::getSettings();
+
+        return $settings;
+    }
+
     protected function settingsHtml(): ?string
     {
         return Craft::$app->getView()->renderTemplate('simple-mailchimp/settings', [

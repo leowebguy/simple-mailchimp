@@ -1,67 +1,49 @@
-Simple Mailchimp plugin for Craft
-===
+# Simple Mailchimp for Craft CMS
 
-A minimal Craft plugin to connect forms to Mailchimp
+A minimal Craft CMS plugin to connect subscription forms directly to Mailchimp.
 
 ---
 
-## Composer | Important
+## Requirements
 
-Craft 5
+This plugin requires:
+- **Craft CMS**: `^5.0.0`
+- **PHP**: `^8.2 || ^8.3 || ^8.4 || ^8.5`
 
-```
-"require": {
-"leowebguy/simple-mailchimp": "^3.0",
-}
-```
-
-Craft 4
-
-```
-"require": {
-   "leowebguy/simple-mailchimp": "^2.0",
-}
-```
-
-Craft 3
-
-```
-"require": {
-   "leowebguy/simple-mailchimp": "^1.0.4",
-}
-```
+For older Craft versions:
+- Craft 4: `"leowebguy/simple-mailchimp": "^2.0"`
+- Craft 3: `"leowebguy/simple-mailchimp": "^1.0.4"`
 
 ---
 
 ## Installation
 
+You can install this plugin from the Plugin Store or via Composer:
+
 ```bash
-composer require leowebguy/simple-mailchimp
+composer require leowebguy/simple-mailchimp -w
 ```
 
-On your Control Panel, go to Settings → Plugins → "Simple Mailchimp" → Install
+Then in your Craft Control Panel, go to **Settings → Plugins → Simple Mailchimp** and click **Install** (or run `php craft plugin/install simple-mailchimp`).
 
-## Credentials
+---
 
-Gather the necessary info from Mailchimp
+## Credentials & Configuration
 
-#### API Key _MC_API_KEY_
+Gather the necessary info from Mailchimp:
 
-Go to https://admin.mailchimp.com/lists > Select Audience > Settings > Audience name and defaults > Audience ID
+1. **API Key (`MC_API_KEY`)**:
+   - Go to [Mailchimp Account API Keys](https://admin.mailchimp.com/account/api/) and generate an API key.
+   - ![Screenshot](resources/api_key.png)
 
-![Screenshot](resources/list_id.png)
+2. **Audience ID (`MC_LIST_ID`)**:
+   - Go to [Mailchimp Audience](https://admin.mailchimp.com/lists) → Select Audience → Settings → Audience name and defaults → Audience ID.
+   - ![Screenshot](resources/list_id.png)
 
-#### Audience ID _MC_LIST_ID_
+3. Add your credentials in **Settings → Simple Mailchimp**:
+   - ![Screenshot](resources/settings.png)
 
-Go to https://admin.mailchimp.com/account/api/ > API Key
-
-![Screenshot](resources/api_key.png)
-
-Add the credentials to plugin settings
-
-![Screenshot](resources/settings.png)
-
-You may also use `.env` parameters like in the example above.
+You can use environment variables in your `.env` file and reference them in the plugin settings (e.g. `$MC_API_KEY` and `$MC_LIST_ID`):
 
 ```dotenv
 # Mailchimp
@@ -69,65 +51,83 @@ MC_API_KEY=xxx12345x1234x123xxx123xxxxx123xx-us14
 MC_LIST_ID=xxx1234xx1234
 ```
 
+---
+
 ## Usage
 
-Your newsletter form template can look something like this:
+Create your newsletter form template:
 
 ```twig
 <form method="post" id="mailchimp">
     {{ csrfInput() }}
-    <input type="hidden" name="tags" value="Tag_1,Tag_2">
-    <input type="text" name="name">
-    <input type="email" name="email">
-    <button type="submit">Submit</button>
+    <input type="hidden" name="tags" value="Newsletter,Website">
+    <input type="text" name="name" placeholder="Your Name">
+    <input type="email" name="email" required placeholder="Your Email">
+    <button type="submit">Subscribe</button>
 </form>
 ```
 
-_The only required field is `email`, all the rest is optional_
+> The only required field is `email`. Optional fields include `name`, `tags`, and `merge_fields`.
 
-use the vanilla js example below:
+### JavaScript Submission Examples
+
+#### Vanilla JavaScript (Fetch API)
 
 ```js
-const form = document.getElementById('#mailchimp')
-form.onsubmit = (e) => {
-    e.preventDefault();
-    fetch('/mailchimp/send', {
-        method: 'post',
-        body: new FormData(this)
-    })
-    .then((r) => r.json())
-    .then((r) => {
-        if (r.success) {
-            alert(r.msg)
-        } else {
-            alert(r.msg)
-        }
-    })
-    .catch((e) => {
-        console.error(e);
+const form = document.querySelector('#mailchimp');
+
+if (form) {
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        fetch('/mailchimp/send', {
+            method: 'POST',
+            body: new FormData(form)
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            alert(data.msg);
+        })
+        .catch((error) => {
+            console.error(error);
+        });
     });
-};
+}
 ```
 
-or jquery/ajax...
+#### jQuery
 
 ```js
-$('form#mailchimp').submit((e) => {
+$('form#mailchimp').on('submit', function (e) {
     e.preventDefault();
     $.post({
         url: '/mailchimp/send',
         data: $(this).serialize(),
-        success: (r) => {
-            if (r.success) {
-                alert(r.msg)
-            } else {
-                alert(r.msg)
-            }
+        success: function (data) {
+            alert(data.msg);
         },
-        error: (e) => {
-            console.error(e);
+        error: function (error) {
+            console.error(error);
         }
     });
 });
 ```
 
+---
+
+## Development & Testing
+
+Run code quality checks and static analysis tools locally:
+
+```bash
+# Validate composer configuration
+composer validate --no-plugins
+
+# Static analysis (PHPStan Level 8)
+composer stan
+
+# Code style check (Laravel Pint / PSR-12)
+composer pint-test
+
+# Code style fixer
+composer pint
+```

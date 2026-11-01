@@ -10,7 +10,6 @@
 }) }}
 
 {{ forms.autosuggestField({
-    first: true,
     name: 'mcListID',
     label: "Mailchimp List ID",
     required: true,
@@ -19,7 +18,6 @@
 }) }}
 
 {{ forms.lightswitchField({
-    first: true,
     name: 'optIn',
     label: 'Double Opt-in',
     on: settings.optIn,

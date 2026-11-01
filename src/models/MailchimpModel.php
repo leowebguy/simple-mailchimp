@@ -1,4 +1,5 @@
 <?php
+
 /**
  * A minimal Craft plugin to connect forms to Mailchimp
  *
@@ -15,5 +16,16 @@ class MailchimpModel extends Model
 {
     public string $mcApiKey = '$MC_API_KEY';
     public string $mcListID = '$MC_LIST_ID';
-    public string $optIn = '0';
+    public bool|string|int $optIn = '0';
+
+    /**
+     * @return array<array<mixed>>
+     */
+    public function rules(): array
+    {
+        return [
+            [['mcApiKey', 'mcListID'], 'string'],
+            [['optIn'], 'safe'],
+        ];
+    }
 }
